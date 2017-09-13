@@ -1,22 +1,62 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+var AccountDAO = require("../models/Account");
 
-    res.render('login', { title: '登录' });
+router.get('/', function (req, res, next) {
+    res.render('login', {errorMsg: ""});
 });
 
-/* GET home page. */
-router.post('/post', function(req, res, next) {
-    debugger;
-    if(!req.body.usename || !req.body.pwd){
-        res.send(commonUtils.result(false,"用户名或者密码不正确"));
-    }
+router.post('/post', function (req, res, next) {
 
-    if(req.body.usename == '840398688@qq.com' && req.body.pwd == 'qwerty'){
-        res.render('index', { title: 'jiangrushe' });
+    try {
+        if (req.body.username && req.body.pwd) {
+            AccountDAO.find(req.body.username, req.body.pwd, function (error, Account) {
+                if (error) {
+                    console.log(error);
+                    return handleError(error);
+                }
+                if (Account != null && Account != '') {
+                    res.redirect("/");
+                } else {
+                    res.render("login", {"errorMsg": "用户名或者密码错误"});
+                }
+
+                // else{
+                //     AccountDAO.save(req.body.username,req.body.pwd,function (error) {
+                //         console.log(error+"**************");
+                //     })
+                // }
+
+
+            });
+        } else {
+            res.send("用户名或者密码不正确");
+        }
+    } catch (e) {
+        console.log(e);
     }
 });
+
+router.get('/register', function (req, res, next) {
+    res.render('register',{errorMsg:""});
+});
+
+router.get('/add', function (req, res, next) {
+    try {
+        console.log("**************");
+        if( req.body.onePwd != req.body.twoPwd){
+            res.render('register',{errorMsg:"两次密码不一致"});
+        }
+
+        AccountDAO.save(req.body.username, req.body.onePwd, function (error) {
+            console.log(error + "**************");
+            res.redirect("/");
+        })
+    } catch (e) {
+        console.log(e);
+    }
+});
+
 
 module.exports = router;
