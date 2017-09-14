@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-
 var AccountDAO = require("../models/Account");
 
 router.get('/', function (req, res, next) {
@@ -17,6 +16,7 @@ router.post('/post', function (req, res, next) {
                     return handleError(error);
                 }
                 if (Account != null && Account != '') {
+                    req.session.user = req.body.username;
                     res.redirect("/");
                 } else {
                     res.render("login", {"errorMsg": "用户名或者密码错误"});
@@ -42,7 +42,7 @@ router.get('/register', function (req, res, next) {
     res.render('register',{errorMsg:""});
 });
 
-router.get('/add', function (req, res, next) {
+router.post('/add', function (req, res, next) {
     try {
         console.log("**************");
         if( req.body.onePwd != req.body.twoPwd){
@@ -50,9 +50,10 @@ router.get('/add', function (req, res, next) {
         }
 
         AccountDAO.save(req.body.username, req.body.onePwd, function (error) {
-            console.log(error + "**************");
+            req.session.user = req.body.username;
             res.redirect("/");
         })
+
     } catch (e) {
         console.log(e);
     }

@@ -1,34 +1,62 @@
+//公共资源模块
 var express = require('express');
+var session = require('express-session')
 var path = require('path');
-
-
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var users = require('./routes/user');
-var login = require('./routes/login');
 var app = express();
+//session拦截器
+app.use(cookieParser());
+app.use(session({
+    secret: '1234567890',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: true ,
+        maxAge: 60000
+    }
+}))
 
-// view engine setup
+
+
+//设置模板
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.html', require('ejs').__express);
 app.set('view engine', 'html');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static('public'))
+app.use(express.static('public'));
 
-app.use('/', routes);
+//业务模块
+var index = require('./routes/index');
+var users = require('./routes/user');
+var adminArticle = require('./routes/admin/article');
+var admin = require('./routes/admin/index');
+var adminLogin = require('./routes/admin/login');
+
+var authorize = require('./filter/authorize');
+
+app.all('/admin/*',authorize.authorize, function(req, res, next){
+    next()
+});
+
+
+
+//业务访问模块
+app.use('/', index);
 app.use('/users', users);
-app.use('/login', login);
-// catch 404 and forward to error handler
+
+app.use('/admin', admin);
+app.use('/admin/login', adminLogin);
+app.use('/admin/article', adminArticle);
+// //登录拦截器
+
+
+// 404 拦截
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
@@ -58,6 +86,7 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
 
 app.set('port', process.env.PORT || 3000);
 
