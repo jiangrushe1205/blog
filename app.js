@@ -1,14 +1,15 @@
 //公共资源模块
 var express = require('express');
-var session = require('express-session')
+var session = require('express-session');
+var validator = require('express-validator');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var app = express();
 //session拦截器
 app.use(cookieParser());
+app.use(validator());
 app.use(session({
     secret: '1234567890',
     resave: false,

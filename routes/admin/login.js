@@ -17,18 +17,11 @@ router.post('/post', function (req, res, next) {
                 }
                 if (Account != null && Account != '') {
                     req.session.user = req.body.username;
+                    console.log("----------------- >> >> session:" +  req.session.user)
                     res.redirect("/admin/index");
                 } else {
                     res.render("login", {"errorMsg": "用户名或者密码错误"});
                 }
-
-                // else{
-                //     AccountDAO.save(req.body.username,req.body.pwd,function (error) {
-                //         console.log(error+"**************");
-                //     })
-                // }
-
-
             });
         } else {
             res.send("用户名或者密码不正确");
