@@ -5,6 +5,7 @@ var articleSchema = new Schema({
     title:  String,
     tag:    String,
     author:  String,
+    summary: String,
     category:  String,
     content: String,
     createTime: { type: Date, default: Date.now },
@@ -22,4 +23,10 @@ ArticleDAO.prototype.save = function(json, callback) {
         callback(err);
     });
 };
+
+ArticleDAO.prototype.find = function(json, callback) {
+    Article.find(json,callback);
+};
+
+
 module.exports = new ArticleDAO();

@@ -38,19 +38,16 @@ router.post("/save", function (req, res, next) {
             var json = {error: ermsg.join("\n")};
             res.render('admin/create', json);
         } else {
-            res.render('admin/article/success');
+            res.redirect('/admin/article/success');
         }
     })
 
 })
 
 /* GET home page. */
-router.get('/create/success', function (req, res, next) {
+router.get('/success', function (req, res, next) {
     res.render('admin/createSuccess', {errorMsg: ""});
 });
 
-/* GET home page. */
-router.get('/create/success', function (req, res, next) {
-    res.render('admin/createSuccess', {errorMsg: ""});
-});
+
 module.exports = router;
