@@ -5,10 +5,10 @@
   "scripts": {
   },
   "dependencies": {
-    "express-session": "~1.15.5",
-    "express-validation": "^1.0.2",
-    "express-validator": "^4.1.1",
-    "express-session": "~4.15.4",
+    "express-session": "1.15.5",
+    "express-validation": "1.0.2",
+    "express-validator": "4.1.1",
+    "express": "4.15.4",
     "mongoose":"4.11.11"
   }
 }
