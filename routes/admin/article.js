@@ -48,4 +48,9 @@ router.post("/save", function (req, res, next) {
 router.get('/create/success', function (req, res, next) {
     res.render('admin/createSuccess', {errorMsg: ""});
 });
+
+/* GET home page. */
+router.get('/create/success', function (req, res, next) {
+    res.render('admin/createSuccess', {errorMsg: ""});
+});
 module.exports = router;
