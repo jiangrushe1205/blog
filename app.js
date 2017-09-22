@@ -6,6 +6,11 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
+var OSS = require('ali-oss').Wrapper;
+var co = require('co');
+var fs = require('fs');
+
 var app = express();
 //session拦截器
 app.use(cookieParser());
@@ -20,6 +25,20 @@ app.use(session({
     }
 }))
 
+var client = new OSS({
+    accessKeyId: 'SdIb90jKzhQBpjZR',
+    accessKeySecret: 'xQStzsVWO3RwyfO90vKfa0vZ4A73GX',
+    region: '91jyy.oss-cn-qingdao'
+});
+
+// // 上传一个文件，成功后下载这个文件
+// client.put('object', '/tmp/file').then(function (val) {
+//     console.log(val.res);
+//     return client.get('object');
+// }).then(function (val) {
+//     console.log(val.res);
+//     console.log(val.content.toString());
+// });
 
 
 //设置模板

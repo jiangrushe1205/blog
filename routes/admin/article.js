@@ -49,5 +49,16 @@ router.get('/success', function (req, res, next) {
     res.render('admin/createSuccess', {errorMsg: ""});
 });
 
+//双穿图片
+router.post("/upload",function(req,res,next){
+    console.log("************");
+    console.log(req.file);
+    // client.multipartUpload(req.file, {
+    //     progress: progress
+    // }).then(function (res) {
+    //     console.log('upload success: %j', res);
+    //     console.log("上传图片")
+    // });
 
+})
 module.exports = router;

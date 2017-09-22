@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {},
   "dependencies": {
+    "ali-oss": "^4.10.1",
     "body-parser": "^1.18.1",
     "cheerio": "^1.0.0-rc.2",
+    "co": "^4.6.0",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.7",
     "express": "4.15.4",

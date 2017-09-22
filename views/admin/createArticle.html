@@ -56,6 +56,10 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="listPic">列表图片</label>
+                                    <input type="file"  style="width: 30%" name="listPic" id="listPic"  onchange="upload(this)">
+                                </div>
+                                <div class="form-group">
                                     <label for="summary">摘要</label>
                                     <textarea  class="form-control" style="width: 60%;height: 100%" name="summary"
                                            id="summary" placeholder="内容摘要"></textarea>
@@ -109,4 +113,32 @@
         //bootstrap WYSIHTML5 - text editor
         $(".textarea").wysihtml5();
     });
+
+    function upload(obj){
+        var formData = new FormData();
+        console.log(obj.files[0])
+        formData.append('file',obj.files[0]);
+        console.log(formData.file);
+        $.ajax({
+            url: '/admin/article/upload',
+            type: 'POST',
+            data: formData,
+            // async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data){
+                if(200 === data.code) {
+                    $('#result').html("上传成功！");
+                    $('#img').attr('src',data.data);
+                } else {
+                    $('#result').html("上传失败！");
+                }
+                console.log('imgUploader upload success');
+            },
+            error: function(){
+                $("#result").html("与服务器通信发生错误");
+            }
+        });
+    }
 </script>
