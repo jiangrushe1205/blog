@@ -11,6 +11,12 @@ var OSS = require('ali-oss').Wrapper;
 var co = require('co');
 var fs = require('fs');
 
+var multer = require('multer');
+var aliOssStorage = require('multer-ali-oss');
+
+var formidable = require('formidable');
+
+
 var app = express();
 //session拦截器
 app.use(cookieParser());
@@ -20,26 +26,35 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        secure: true ,
+        secure: true,
         maxAge: 60000
     }
 }))
 
+
+
 var client = new OSS({
+    region: 'oss-cn-qingdao',
     accessKeyId: 'SdIb90jKzhQBpjZR',
-    accessKeySecret: 'xQStzsVWO3RwyfO90vKfa0vZ4A73GX',
-    region: '91jyy.oss-cn-qingdao'
+    accessKeySecret: 'xQStzsVWO3RwyfO90vKfa0vZ4A73GX'
 });
 
-// // 上传一个文件，成功后下载这个文件
-// client.put('object', '/tmp/file').then(function (val) {
-//     console.log(val.res);
-//     return client.get('object');
-// }).then(function (val) {
-//     console.log(val.res);
-//     console.log(val.content.toString());
+// co(function* () {
+//     var result = yield client.listBuckets();
+//     console.log(result);
+// }).catch(function (err) {
+//     console.log(err);
 // });
 
+
+co(function* () {
+    client.useBucket('91jyy');      //Your Bucket name
+    var result = yield client.list({
+        'max-keys': 5
+    });
+}).catch(function (err) {
+    console.log(err);
+});
 
 //设置模板
 app.set('views', path.join(__dirname, 'views'));
@@ -48,7 +63,7 @@ app.set('view engine', 'html');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('public'));
 
 //业务模块
@@ -60,10 +75,9 @@ var adminLogin = require('./routes/admin/login');
 
 var authorize = require('./filter/authorize');
 
-app.all('/admin/*',authorize.authorize, function(req, res, next){
+app.all('/admin/*', authorize.authorize, function (req, res, next) {
     next()
 });
-
 
 
 //业务访问模块
@@ -75,9 +89,27 @@ app.use('/admin/login', adminLogin);
 app.use('/admin/article', adminArticle);
 // //登录拦截器
 
+//上传图片
+app.post("/upload", function (req, res, next) {
+    console.log(req.file);
+    var form = new formidable.IncomingForm();
+    form.parse(req, function(err, fields, files) {
+        client.put(files.listPic.name, files.listPic.path).then(function (r1) {
+            console.log('put success: %j', r1);
+            res.send(r1.url);
+        }).then(function (r2) {
+            console.log('get success: %j', r2);
+        }).catch(function (err) {
+            console.error('error: %j', err);
+        });
+    });
+
+
+})
+
 
 // 404 拦截
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -88,7 +120,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -99,7 +131,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
@@ -110,6 +142,6 @@ app.use(function(err, req, res, next) {
 
 app.set('port', process.env.PORT || 3000);
 
-var server = app.listen(app.get('port'), function() {
-   console.log('Express server listening on port ' + server.address().port);
+var server = app.listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + server.address().port);
 });

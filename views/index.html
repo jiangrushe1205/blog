@@ -41,12 +41,12 @@
                     <div class="wthree">
                         <div class="col-md-6 wthree-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
                             <div class="tch-img">
-                                <a href="singlepage.html"><img src="images/f1.jpg" class="img-responsive" alt=""></a>
+                                <a href="singlepage.html"><img src="<%=article[i].listPic%>" class="img-responsive" alt=""></a>
                             </div>
                         </div>
                         <div class="col-md-6 wthree-right wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-                            <h3><a href="singlepage.html"><%=article[i].title%></a></h3>
-                            <h6>BY <a href="singlepage.html"><%=article[i].author%></a><%=article[i].createTime%>.</h6>
+                            <h3><a href="singlepage.html"><%=article[i].title%> <%=article[i].listPic%></a></h3>
+                            <h6> <a href="singlepage.html"><%=article[i].author%></a><%=article[i].createTime%>.</h6>
                             <p><%=article[i].summary%> .</p>
                             <div class="bht1">
                                 <a href="singlepage.html">继续阅读</a>

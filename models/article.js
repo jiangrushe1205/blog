@@ -8,6 +8,7 @@ var articleSchema = new Schema({
     summary: String,
     category:  String,
     content: String,
+    listPic:String,
     createTime: { type: Date, default: Date.now },
     updateTime: { type: Date, default: Date.now }
 });

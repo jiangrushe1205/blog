@@ -56,13 +56,18 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="listPic">列表图片</label>
-                                    <input type="file"  style="width: 30%" name="listPic" id="listPic"  onchange="upload(this)">
+                                    <label for="summary">摘要</label>
+                                    <textarea class="form-control" style="width: 60%;height: 100%" name="summary"
+                                              id="summary" placeholder="内容摘要"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="summary">摘要</label>
-                                    <textarea  class="form-control" style="width: 60%;height: 100%" name="summary"
-                                           id="summary" placeholder="内容摘要"></textarea>
+                                    <label for="listPic">列表图片</label>
+                                    <input type="file" style="width: 30%" id="listPic"
+                                           multiple="multiple" onchange="upload(this)">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" name="listPic" id="listPicUrl" >
+                                    <img id="img">
                                 </div>
 
                                 <div class="form-group">
@@ -100,6 +105,12 @@
 </div>
 <!-- ./wrapper -->
 
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary" style="width: 15%">保存</button>
+    </div>
+</form>
+
 <% include footer.html %>
 <!-- FastClick -->
 <script src="/plugins/fastclick/fastclick.js"></script>
@@ -114,31 +125,44 @@
         $(".textarea").wysihtml5();
     });
 
-    function upload(obj){
+    function upload(obj) {
+        var file = document.getElementById("listPic")
         var formData = new FormData();
-        console.log(obj.files[0])
-        formData.append('file',obj.files[0]);
-        console.log(formData.file);
+        formData.append('listPic', file.files[0]);
         $.ajax({
-            url: '/admin/article/upload',
+            url: '/upload',
             type: 'POST',
             data: formData,
             // async: false,
             cache: false,
             contentType: false,
             processData: false,
-            success: function(data){
-                if(200 === data.code) {
-                    $('#result').html("上传成功！");
-                    $('#img').attr('src',data.data);
-                } else {
-                    $('#result').html("上传失败！");
-                }
-                console.log('imgUploader upload success');
+            success: function (data) {
+                console.log(data)
+
+                $('#listPicUrl').val(data);
+                $('#img').attr('src', data);
             },
-            error: function(){
+            error: function () {
                 $("#result").html("与服务器通信发生错误");
             }
         });
+
+//        var xhr = new XMLHttpRequest();
+//        xhr.onreadystatechange = function () {
+//            if (xhr.readyState == 4) {
+//                if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+//                    alert(xhr.responseText);
+//                } else {
+//                    alert("Response was unsuccessful:" + xhr.status);
+//                }
+//            }
+//        };
+//
+//        xhr.open("post", "/upload", false);
+//
+//        xhr.setRequestHeader('Content-Type','multipart/form-data');
+//        xhr.send(formData);
+
     }
 </script>
