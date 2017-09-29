@@ -66,11 +66,36 @@
                                            multiple="multiple" onchange="upload(this)">
                                 </div>
                                 <div class="form-group">
-                                    <input type="hidden" name="listPic" id="listPicUrl" >
+                                    <input type="hidden" name="listPic" id="listPicUrl">
                                     <img id="img">
                                 </div>
 
                                 <div class="form-group">
+
+                                    <div class="box box-info">
+                                        <div class="box-header">
+                                            <h3 class="box-title">CK Editor
+                                                <small>Advanced and full of features</small>
+                                            </h3>
+                                            <!-- tools box -->
+                                            <div class="pull-right box-tools">
+                                                <button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                                    <i class="fa fa-minus"></i></button>
+                                                        <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">
+                                                    <i class="fa fa-times"></i></button>
+                                            </div>
+                                            <!-- /. tools -->
+                                        </div>
+                                        <!-- /.box-header -->
+                                        <div class="box-body pad">
+                                            <form>
+                                                <textarea id="editor1" name="editor1" rows="10" cols="80">
+                                                                        This is my textarea to be replaced with CKEditor.
+                                                </textarea>
+                                            </form>
+                                        </div>
+                                    </div>
+
                                     <div class="box">
                                         <div class="box-header">
                                             <h3 class="box-title">内容
@@ -117,12 +142,10 @@
 <!-- AdminLTE App -->
 <script src="/admin/dist/js/demo.js"></script>
 
-<!-- Bootstrap WYSIHTML5 -->
-<script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
 <script>
     $(function () {
-        //bootstrap WYSIHTML5 - text editor
-        $(".textarea").wysihtml5();
+        CKEDITOR.replace('editor1');
     });
 
     function upload(obj) {
@@ -147,22 +170,5 @@
                 $("#result").html("与服务器通信发生错误");
             }
         });
-
-//        var xhr = new XMLHttpRequest();
-//        xhr.onreadystatechange = function () {
-//            if (xhr.readyState == 4) {
-//                if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-//                    alert(xhr.responseText);
-//                } else {
-//                    alert("Response was unsuccessful:" + xhr.status);
-//                }
-//            }
-//        };
-//
-//        xhr.open("post", "/upload", false);
-//
-//        xhr.setRequestHeader('Content-Type','multipart/form-data');
-//        xhr.send(formData);
-
     }
 </script>

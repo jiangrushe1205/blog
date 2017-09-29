@@ -1,7 +1,10 @@
 html, body{
-font-family: 'Raleway', sans-serif;
-	font-size: 100%;
-	background: #f7f7f7;
+/*font-family: 'Raleway', sans-serif;*/
+	/*font-size: 100%;*/
+	/*background: #f7f7f7;*/
+    font-family:"微软雅黑";
+    font-size: 100%;
+    background: #f7f7f7;
 }
 body a,.grid_1,plan_1,plan_1.one,plan_1.two,i.icon1, i.icon2, i.icon3, i.icon4, i.icon5, i.icon6 {
 	transition:0.5s all;
@@ -40,7 +43,7 @@ label{
     background: #FFF;
     padding: 1em 0;
     box-shadow: 0px 1px 9px 1px #cfcfcf;
-    border-top: 2px solid #fa4b2a;
+    border-top: 2px solid #337ab7;
 }
 .navbar-right {
     float: left !important;
@@ -174,7 +177,7 @@ label.icon-search span {
 .head-left {
     float: left;
     position: relative;
-    width: 9%;
+    /*width: 9%;*/
 }
 .navbar {
     margin-bottom: 0;
@@ -194,11 +197,11 @@ label.icon-search span {
     font-weight: 600;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    color: #fa4b2a;
+    color: #337ab7;
     background: none;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-    color:#fa4b2a;
+    color:#337ab7;
 }
 .navbar-default .navbar-nav > .active > a:before{
 	color:#fa4b2a;
@@ -345,7 +348,7 @@ min-height: 250px;
 .nav-tabs>li>a:hover, .nav>li>a:focus {
     text-decoration: none;
     background-color: #FFF;
-    border-bottom: 3px solid #fa4b2a;
+    border-bottom: 3px solid #337ab7;
 }
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
 	 border-bottom: 3px solid #fa4b2a;
@@ -400,8 +403,8 @@ i.glyphicon.glyphicon-comment {
   position: relative;
 }
 .tc-ch h3 a,.wthree h3 a {
-    color: #fa4b2a;
-    font-weight: 600;
+    color: #4F94CD;
+    font-weight: 500;
 }
 .tc-ch h3 a:hover, .wthree h3 a:hover {
     color: #000000;
@@ -414,7 +417,7 @@ i.glyphicon.glyphicon-comment {
 }
 .tc-ch h3,.wthree h3  {
     margin: 0.5em 0 0;
-	font-size:1.5em;
+	font-size:1.2em;
 }
 .wthree h3  {
 	margin:0;
@@ -434,17 +437,17 @@ i.glyphicon.glyphicon-comment {
 }
 .tc-ch {
     background: #fff;
-    padding: 2em 2em;
-    margin-bottom: 1em;
+    padding: 1em 1em;
+    margin-bottom: 0.5em;
 }
 .bht1 a{
-    background: #fa4b2a;
+    background: rgba(51, 122, 183, 0.8);
     padding: 0.3em 1.8em;
 	display:inline-block;
     color: #fff;
 }
 .bht1 a:hover{
-    background: #000;
+    background: #fff;
 }
 .bht1 {
     float: left;
@@ -457,7 +460,7 @@ i.glyphicon.glyphicon-comment {
     margin-top: 1em;
 }
 .tc-ch h6 a,.wthree h6 a {
-    color: #fa4b2a;
+    color: #EE7942;
 }
 .wthree-left {
     padding: 0;
@@ -517,7 +520,7 @@ i.glyphicon.glyphicon-comment {
 }
 .tech-btm h4 {
     font-size: 1.5em;
-    color: #fa4b2a;
+    color: #000;
     font-weight: 700;
     margin-bottom: 1em;
 }
@@ -603,7 +606,7 @@ i.glyphicon.glyphicon-comment {
 }
 /*--footer--*/
 .footer {
-    background: #303030;
+    background: #337ab7;
     padding: 3em 0;
     margin-top: 3em;
 }
@@ -616,7 +619,7 @@ i.glyphicon.glyphicon-comment {
 }
 .footer p {
     font-size: 0.875em;
-    color: #fff;
+    color: #000;
     margin: 1em 0;
     line-height: 1.8em;
 }
@@ -624,7 +627,7 @@ i.glyphicon.glyphicon-comment {
     margin: 0;
 }
 .footer-middle a {
-    color: #fa4b2a;
+    color: #2bf306;
 	font-family: 'Open Sans', sans-serif;
 }
 .footer h4 {
@@ -660,9 +663,9 @@ i.glyphicon.glyphicon-comment {
   font-family: 'Open Sans', sans-serif;
 }
 .name form input[type="submit"] {
-  background:#fa4b2a; 
+  background:#26bf71;
   padding: 10px 0;
-  color: #fff;
+  color: #000;
   font-size: 14px;
   font-weight: 400;
   display: block;
@@ -693,7 +696,7 @@ i.glyphicon.glyphicon-comment {
     color:#fa4b2a;
 }
 .technology {
-    margin-top: 3em;
+    margin-top: 0.5em;
 }
 /*--welcome-starts--*/
 .w3agile-1{

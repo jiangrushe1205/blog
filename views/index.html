@@ -13,44 +13,31 @@
                         <a href="singlepage.html"><img src="images/t4.jpg" class="img-responsive" alt=""></a>
                     </div>
 
-                    <h3><a href="singlepage.html">Lorem Ipsum is simply</a></h3>
-                    <h6>BY <a href="singlepage.html">ADAM ROSE </a>JULY 10 2016.</h6>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud eiusmod tempor incididunt
-                        ut labore et dolore magna aliqua exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat.</p>
-                    <p>Ut enim ad minim veniam, quis nostrud eiusmod tempor incididunt ut labore et dolore magna aliqua
-                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <div class="bht1">
-                        <a href="singlepage.html">Continue Reading</a>
-                    </div>
-                    <div class="soci">
-                        <ul>
-                            <li class="hvr-rectangle-out"><a class="fb" href="#"></a></li>
-                            <li class="hvr-rectangle-out"><a class="twit" href="#"></a></li>
-                            <li class="hvr-rectangle-out"><a class="goog" href="#"></a></li>
-                            <li class="hvr-rectangle-out"><a class="pin" href="#"></a></li>
-                            <li class="hvr-rectangle-out"><a class="drib" href="#"></a></li>
-                        </ul>
-                    </div>
+                    <h3><a href="singlepage.html">泰国总理巴育透露英拉行踪：目前身处迪拜</a></h3>
+                    <p>中新网9月28日电 据外媒报道，泰国总理巴育28日披露，因“大米渎职案”获刑五年的前总理英拉目前正身处迪拜。
+
+                        报道称，巴育表示，通过情报人员，他已经掌握英拉的行踪。巴育还表示，他将进一步公布相关细节。
+
+                        当地时间27日，泰国最高法院政务人员刑事案件法庭再次就英拉“大米渎职案”开庭，英拉被判五年有期徒刑，不予保释。</p>
                     <div class="clearfix"></div>
                 </div>
                 <div class="clearfix"></div>
                 <!-- technology-top -->
                 <% for( i = 0; i < article.length;i++) { %>
-                    <div class="wthree">
-                        <div class="col-md-6 wthree-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
+                    <div class="wthree" style="padding: 1em 1em;margin-bottom: 0.5em;">
+                        <div class="col-md-6 wthree-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s" style="width:30%">
                             <div class="tch-img">
-                                <a href="singlepage.html"><img src="<%=article[i].listPic%>" class="img-responsive" alt=""></a>
+                                <% if(article[i].listPic){ %>
+                                    <a href="singlepage.html"><img src="<%=article[i].listPic%>" class="img-responsive" alt="" style="display: block;max-width: 100%;height: 11em;width: 23em;"></a>
+                                <% }else{%>
+                                    <a href="singlepage.html"><img src="images/defaultListPic.jpeg" class="img-responsive" alt="" style="display: block;max-width: 100%;height: 11em;width: 23em;"></a>
+                                <% }%>
                             </div>
                         </div>
-                        <div class="col-md-6 wthree-right wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-                            <h3><a href="singlepage.html"><%=article[i].title%> <%=article[i].listPic%></a></h3>
-                            <h6> <a href="singlepage.html"><%=article[i].author%></a><%=article[i].createTime%>.</h6>
+                        <div class="col-md-6 wthree-right wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s" style="width:70%">
+                            <h3><a href="singlepage.html"><%=article[i].title%></a></h3>
+                            <h6> <a href="singlepage.html"><%=article[i].author%></a><span style="padding-left: 1em"><%=article[i].createTimeString%></span></h6>
                             <p><%=article[i].summary%> .</p>
-                            <div class="bht1">
-                                <a href="singlepage.html">继续阅读</a>
-                            </div>
                             <div class="soci">
                                 <!--<ul>-->
                                     <!--<li class="hvr-rectangle-out"><a class="twit" href="#">阅读(10)</a></li>-->
@@ -72,61 +59,29 @@
             <div class="blo-top1">
 
                 <div class="tech-btm">
-                    <div class="search-1 wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-                        <form action="#" method="post">
-                            <input type="search" name="Search" value="Search" onfocus="this.value = '';"
-                                   onblur="if (this.value == '') {this.value = 'Search';}" required="">
-                            <input type="submit" value=" ">
-                        </form>
-                    </div>
-                    <h4>Popular Posts </h4>
                     <div class="blog-grids wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-                        <div class="blog-grid-left">
-                            <a href="singlepage.html"><img src="images/t2.jpg" class="img-responsive" alt=""></a>
-                        </div>
+                        <h4>分享 </h4>
                         <div class="blog-grid-right">
-
-                            <h5><a href="singlepage.html">Pellentesque dui Maecenas male</a></h5>
+                            <!-- JiaThis Button BEGIN -->
+                            <div class="jiathis_style_32x32">
+                                <a class="jiathis_button_qzone"></a>
+                                <a class="jiathis_button_tsina"></a>
+                                <a class="jiathis_button_tqq"></a>
+                                <a class="jiathis_button_weixin"></a>
+                            </div>
+                            <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+                            <!-- JiaThis Button END -->
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     <div class="blog-grids wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-                        <div class="blog-grid-left">
-                            <a href="singlepage.html"><img src="images/m2.jpg" class="img-responsive" alt=""></a>
-                        </div>
+                        <h4>我的标签</h4>
                         <div class="blog-grid-right">
-
-                            <h5><a href="singlepage.html">Pellentesque dui Maecenas male</a></h5>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="blog-grids wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-                        <div class="blog-grid-left">
-                            <a href="singlepage.html"><img src="images/f2.jpg" class="img-responsive" alt=""></a>
-                        </div>
-                        <div class="blog-grid-right">
-
-                            <h5><a href="singlepage.html">Pellentesque dui Maecenas male</a></h5>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="blog-grids wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-                        <div class="blog-grid-left">
-                            <a href="singlepage.html"><img src="images/t3.jpg" class="img-responsive" alt=""></a>
-                        </div>
-                        <div class="blog-grid-right">
-
-                            <h5><a href="singlepage.html">Pellentesque dui Maecenas male</a></h5>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="blog-grids wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-                        <div class="blog-grid-left">
-                            <a href="singlepage.html"><img src="images/m3.jpg" class="img-responsive" alt=""></a>
-                        </div>
-                        <div class="blog-grid-right">
-
-                            <h5><a href="singlepage.html">Pellentesque dui Maecenas male</a></h5>
+                            <h5><a href="singlepage.html">java(12)</a></h5>
+                            <h5><a href="singlepage.html">nodejs(2)</a></h5>
+                            <h5><a href="singlepage.html">网络文章(5)</a></h5>
+                            <h5><a href="singlepage.html">mongo(6)</a></h5>
+                            <h5><a href="singlepage.html">redis(7)</a></h5>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -168,50 +123,4 @@
         <!-- technology-right -->
     </div>
 </div>
-<div class="footer">
-    <div class="container">
-        <div class="col-md-4 footer-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-            <h4>About Me</h4>
-            <p>Consectetur adipisicing Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod .</p>
-            <img src="images/t4.jpg" class="img-responsive" alt="">
-            <div class="bht1">
-                <a href="singlepage.html">Read More</a>
-            </div>
-        </div>
-        <div class="col-md-4 footer-middle wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-            <h4>Latest Tweet</h4>
-            <div class="mid-btm">
-                <p>Sed do eiusmod tempor Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod .</p>
-                <a href="http://sc.chinaz.com/">http://sc.chinaz.com/</a>
-            </div>
-
-            <p>Consectetur adipisicing Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod .</p>
-            <a href="http://sc.chinaz.com/">http://sc.chinaz.com/</a>
-
-        </div>
-        <div class="col-md-4 footer-right wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-            <h4>Newsletter</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</p>
-            <div class="name">
-                <form action="#" method="post">
-                    <input type="text" placeholder="Your Name" required="">
-                    <input type="text" placeholder="Your Email" required="">
-                    <input type="submit" value="Subscribed Now">
-                </form>
-
-            </div>
-
-            <div class="clearfix"></div>
-
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
-<div class="copyright wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-    <div class="container">
-        <p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">
-            &#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
-    </div>
-</div>
-
 <% include footer.html %>

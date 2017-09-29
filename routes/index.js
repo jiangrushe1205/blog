@@ -6,8 +6,7 @@ var ArticleDao = require('../models/article');
 router.get('/', function(req, res, next) {
   ArticleDao.find({},function (error,doc) {
     for(var i = 0 ; i < doc.length ; i++){
-      console.log(moment(doc[i].createTime).format("YYYY-MM-DD"))
-        doc[i].createTime = moment(doc[i].createTime).format("MMM Do YY");
+      doc[i].createTimeString = moment(doc[i].createTime).format("YYYY-MM-DD");
     }
     res.render('index', {article:doc});
   });
