@@ -1,0 +1,40 @@
+<% include header.html %>
+<% include nav.html %>
+<!-- banner -->
+
+<!-- technology-left -->
+<div class="technology">
+    <div class="container">
+        <div class="col-md-9 technology-left">
+            <div class="agileinfo">
+                <h2 class="w3"><%=article[0].title %></h2>
+                <div class="single">
+                    <div class="b-bottom">
+                        <h5 class="top"><%=article[0].author %>   <%=article[0].createTimeString %></h5>
+                        <img src="<%=article[0].listPic%>" class="img-responsive" alt="" style="width: auto;height:auto">
+                        <p class="sub"><%=article[0].content %></p>
+                        <p><a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>0 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>56 </a></p>
+                    </div>
+                </div>
+
+
+                <div class="coment-form">
+                    <h4>留言</h4>
+                    <form action="#" method="post">
+                        <input type="text" value="Name " name="name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
+                        <input type="email" value="Email" name="email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+                        <input type="text" value="Website" name="websie" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Website';}" required="">
+                        <textarea onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Comment...';}" required="">Your Comment...</textarea>
+                        <input type="submit" value="提交">
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- technology-right -->
+        <% include right.html %>
+        <div class="clearfix"></div>
+        <!-- technology-right -->
+    </div>
+</div>
+<% include footer.html %>

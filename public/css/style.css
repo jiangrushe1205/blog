@@ -460,7 +460,7 @@ i.glyphicon.glyphicon-comment {
     margin-top: 1em;
 }
 .tc-ch h6 a,.wthree h6 a {
-    color: #EE7942;
+    color: rgba(0, 0, 0, 0.77);
 }
 .wthree-left {
     padding: 0;
@@ -526,7 +526,7 @@ i.glyphicon.glyphicon-comment {
 }
 .insta h4 {
     font-size: 1.5em;
-    color: #fa4b2a;
+    /*color: #fa4b2a;*/
     font-weight: 700;
     margin-bottom: 1em;
 }
@@ -619,7 +619,7 @@ i.glyphicon.glyphicon-comment {
 }
 .footer p {
     font-size: 0.875em;
-    color: #000;
+    color: #2df30b;
     margin: 1em 0;
     line-height: 1.8em;
 }
@@ -705,7 +705,7 @@ i.glyphicon.glyphicon-comment {
 }
 h2.w3,h3.w3{
     font-size: 2em;
-    color: #fa4b2a;
+    color: #777;
     font-weight: 600;
 }
 .welcome-bottom{
@@ -1559,13 +1559,13 @@ p.reply i{
     background: #fff;
 }
 h5.top {
-    color: #fa4b2a;
-    font-size: 1.6em;
+    color: #337ab7;
+    font-size: 1.0em;
     font-weight: 600;
     margin: 0.8em 0;
 }
 .single {
-    margin-top: 3em;
+    margin-top: 1em;
 }
 span.glyphicon.glyphicon-comment:hover, span.glyphicon.glyphicon-eye-open:hover, span.glyphicon.glyphicon-thumbs-up:hover, a.span_link {
     color: #000008;

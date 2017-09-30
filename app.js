@@ -100,7 +100,7 @@ var users = require('./routes/user');
 var adminArticle = require('./routes/admin/article');
 var admin = require('./routes/admin/index');
 var adminLogin = require('./routes/admin/login');
-
+var article = require('./routes/article');
 var authorize = require('./filter/authorize');
 
 app.all('/admin/*', authorize.authorize, function (req, res, next) {
@@ -111,6 +111,7 @@ app.all('/admin/*', authorize.authorize, function (req, res, next) {
 //业务访问模块
 app.use('/', index);
 app.use('/users', users);
+app.use('/article', article);
 app.use('/admin', admin);
 app.use('/admin/login', adminLogin);
 app.use('/admin/article', adminArticle);

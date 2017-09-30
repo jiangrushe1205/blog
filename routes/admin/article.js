@@ -42,7 +42,8 @@ router.post("/save", function (req, res, next) {
         tag: req.body.tag,
         category: req.body.category,
         content: req.body.content,
-        listPic: req.body.listPic
+        listPic: req.body.listPic,
+        summary:req.body.summary
     };
     ArticleDao.save(article, function (err) {
         if (err) {

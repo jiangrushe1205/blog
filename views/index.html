@@ -24,19 +24,20 @@
                 <div class="clearfix"></div>
                 <!-- technology-top -->
                 <% for( i = 0; i < article.length;i++) { %>
+
                     <div class="wthree" style="padding: 1em 1em;margin-bottom: 0.5em;">
                         <div class="col-md-6 wthree-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s" style="width:30%">
                             <div class="tch-img">
                                 <% if(article[i].listPic){ %>
-                                    <a href="singlepage.html"><img src="<%=article[i].listPic%>" class="img-responsive" alt="" style="display: block;max-width: 100%;height: 11em;width: 23em;"></a>
+                                    <a href="/article/detail?id=<%=article[i]._id %>"><img src="<%=article[i].listPic%>" class="img-responsive" alt="" style="display: block;max-width: 100%;height: 11em;width: 23em;"></a>
                                 <% }else{%>
-                                    <a href="singlepage.html"><img src="images/defaultListPic.jpeg" class="img-responsive" alt="" style="display: block;max-width: 100%;height: 11em;width: 23em;"></a>
+                                    <a href="/article/detail?id=<%=article[i]._id %>"><img src="images/defaultListPic.jpeg" class="img-responsive" alt="" style="display: block;max-width: 100%;height: 11em;width: 23em;"></a>
                                 <% }%>
                             </div>
                         </div>
                         <div class="col-md-6 wthree-right wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s" style="width:70%">
-                            <h3><a href="singlepage.html"><%=article[i].title%></a></h3>
-                            <h6> <a href="singlepage.html"><%=article[i].author%></a><span style="padding-left: 1em"><%=article[i].createTimeString%></span></h6>
+                            <h3><a href="/article/detail?id=<%=article[i]._id %>"><%=article[i].title%></a></h3>
+                            <h6> <a href="/article/detail?id=<%=article[i]._id %>"><%=article[i].author%></a><span style="padding-left: 1em"><%=article[i].createTimeString%></span></h6>
                             <p><%=article[i].summary%> .</p>
                             <div class="soci">
                                 <!--<ul>-->
@@ -53,72 +54,7 @@
             </div>
         </div>
         <!-- technology-right -->
-        <div class="col-md-3 technology-right">
-
-
-            <div class="blo-top1">
-
-                <div class="tech-btm">
-                    <div class="blog-grids wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-                        <h4>分享 </h4>
-                        <div class="blog-grid-right">
-                            <!-- JiaThis Button BEGIN -->
-                            <div class="jiathis_style_32x32">
-                                <a class="jiathis_button_qzone"></a>
-                                <a class="jiathis_button_tsina"></a>
-                                <a class="jiathis_button_tqq"></a>
-                                <a class="jiathis_button_weixin"></a>
-                            </div>
-                            <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-                            <!-- JiaThis Button END -->
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="blog-grids wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-                        <h4>我的标签</h4>
-                        <div class="blog-grid-right">
-                            <h5><a href="singlepage.html">java(12)</a></h5>
-                            <h5><a href="singlepage.html">nodejs(2)</a></h5>
-                            <h5><a href="singlepage.html">网络文章(5)</a></h5>
-                            <h5><a href="singlepage.html">mongo(6)</a></h5>
-                            <h5><a href="singlepage.html">redis(7)</a></h5>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="insta wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-                        <h4>Instagram</h4>
-                        <ul>
-
-                            <li><a href="singlepage.html"><img src="images/t1.jpg" class="img-responsive" alt=""></a>
-                            </li>
-                            <li><a href="singlepage.html"><img src="images/m1.jpg" class="img-responsive" alt=""></a>
-                            </li>
-                            <li><a href="singlepage.html"><img src="images/f1.jpg" class="img-responsive" alt=""></a>
-                            </li>
-                            <li><a href="singlepage.html"><img src="images/m2.jpg" class="img-responsive" alt=""></a>
-                            </li>
-                            <li><a href="singlepage.html"><img src="images/f2.jpg" class="img-responsive" alt=""></a>
-                            </li>
-                            <li><a href="singlepage.html"><img src="images/t2.jpg" class="img-responsive" alt=""></a>
-                            </li>
-                            <li><a href="singlepage.html"><img src="images/f3.jpg" class="img-responsive" alt=""></a>
-                            </li>
-                            <li><a href="singlepage.html"><img src="images/t3.jpg" class="img-responsive" alt=""></a>
-                            </li>
-                            <li><a href="singlepage.html"><img src="images/m3.jpg" class="img-responsive" alt=""></a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <p>Lorem ipsum ex vix illud nonummy, novum tation et his. At vix scripta patrioque scribentur, at
-                        pro</p>
-                </div>
-
-
-            </div>
-
-
-        </div>
+        <% include right.html %>
         <div class="clearfix"></div>
         <!-- technology-right -->
     </div>
