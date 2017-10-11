@@ -1,5 +1,6 @@
 var express = require('express');
 var ArticleDao = require('../../models/article');
+var CategoryDAO = require('../../models/category');
 var router = express.Router();
 
 /**
@@ -13,7 +14,11 @@ var cheerio = require('cheerio');
  * 创建文章
  */
 router.get('/create', function (req, res, next) {
-    res.render('admin/createArticle', {errorMsg: ""});
+
+    CategoryDAO.find({}, function (error, doc) {
+        res.render('admin/createArticle', {"categoryList": doc});
+    })
+
 });
 
 /**
@@ -50,6 +55,17 @@ router.post("/save", function (req, res, next) {
             var json = {error: ermsg.join("\n")};
             res.render('admin/create', json);
         } else {
+            CategoryDAO.findOne({categoryName:req.body.category},function (error,doc) {
+                if(doc){
+                    var count = doc.count?parseInt(doc.count):0;
+                    CategoryDAO.update({"categoryName":req.body.category},{ "count": count + 1 },function(error,doc){
+                        console.log("-------------------------" + doc);
+                    })
+                }else{
+                    console.log("-------------------------失败");
+                }
+
+            })
             res.redirect('/admin/article/success');
         }
     })
@@ -75,6 +91,44 @@ router.get('/reptile', function (req, res, next) {
     })
 
 
+});
+
+/**
+ * 添加分类
+ */
+router.get('/category', function (req, res, next) {
+    res.render('admin/addCategory', {errorMsg: ""});
+});
+
+/**
+ * 添加分类
+ */
+router.post('/add/category', function (req, res, next) {
+    req.assert('categoryName', "分类不能为空").notEmpty();
+    var errors = req.validationErrors();
+    if (errors && errors.length > 0) {
+        var ermsg = [];
+        for (var i = 0; i < errors.length; i++) {
+            ermsg.push(errors[i].msg);
+        }
+        var json = {title: '管理后台-- 请先登录', error: ermsg.join("\n")};
+        res.render('admin/login', json);
+        return;
+    }
+    var category = {
+        categoryName: req.body.categoryName,
+        count:0
+    };
+
+
+    CategoryDAO.save(category, function (err) {
+        if (err) {
+            var json = {error: ermsg.join("\n")};
+            res.render('admin/category', json);
+        } else {
+            res.redirect('/admin/article/success');
+        }
+    })
 });
 
 

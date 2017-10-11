@@ -8,11 +8,9 @@
             <div class="blog-grids wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
                 <h4>我的标签</h4>
                 <div class="blog-grid-right">
-                    <h5><a href="singlepage.html">java(12)</a></h5>
-                    <h5><a href="singlepage.html">nodejs(2)</a></h5>
-                    <h5><a href="singlepage.html">网络文章(5)</a></h5>
-                    <h5><a href="singlepage.html">mongo(6)</a></h5>
-                    <h5><a href="singlepage.html">redis(7)</a></h5>
+                    <% for( i = 0; i < categoryList.length;i++) { %>
+                        <h5><a href="/article/category/<%=categoryList[i].categoryName %>"><%=categoryList[i].categoryName %>(<%=categoryList[i].count %>)</a></h5>
+                    <% } %>
                 </div>
                 <div class="clearfix"></div>
             </div>

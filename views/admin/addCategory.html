@@ -1,0 +1,51 @@
+<% include header.html %>
+<link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <% include nav.html %>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">文章管理</a></li>
+                <li class="active">创建分类</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">创建文章分类</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form role="form" action="/admin/article/add/category" method="post">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="categoryName">分类名称</label>
+                            <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="请输入分类名称">
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+</div>
+<!-- ./wrapper -->
+
+<% include footer.html %>
+<!-- AdminLTE App -->
+<script src="/admin/dist/js/demo.js"></script>
