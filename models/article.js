@@ -9,6 +9,7 @@ var articleSchema = new Schema({
     category:  String,
     content: String,
     listPic:String,
+    readCount:String,
     createTime: { type: Date, default: Date.now },
     updateTime: { type: Date, default: Date.now }
 });
@@ -28,6 +29,10 @@ ArticleDAO.prototype.save = function(json, callback) {
 ArticleDAO.prototype.find = function(json, callback) {
     Article.find(json,callback);
 };
+
+ArticleDAO.prototype.update = function(conditions,update,callback){
+    Article.update(conditions,update,callback);
+}
 
 
 module.exports = new ArticleDAO();

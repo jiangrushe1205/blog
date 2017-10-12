@@ -13,7 +13,7 @@
                         <h5 class="top"><%=article[0].author %>   <%=article[0].createTimeString %></h5>
                         <img src="<%=article[0].listPic%>" class="img-responsive" alt="" style="width: auto;height:auto">
                         <p class="sub"><%-article[0].content %></p>
-                        <p><a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>0 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span>56 </a></p>
+                        <p><a class="span_link" href="#"><span class="glyphicon glyphicon-comment"></span>0 </a><a class="span_link" href="#"><span class="glyphicon glyphicon-eye-open"></span><%=article[0].readCount %> </a></p>
                     </div>
                 </div>
 

@@ -17,6 +17,15 @@ router.get('/detail', function(req, res, next) {
         })
     }
 
+    var updateCount = function(count){
+        return new Promise(function(resolve,reject){
+            ArticleDao.update({"_id":req.query.id},{"readCount":count},function (error,doc) {
+                if(error) reject(error);
+                resolve();
+            });
+        })
+    }
+
     var categoryList = function(){
         return new Promise(function(resolve,reject){
             CategoryDao.find({}, function (error, doc) {
@@ -28,6 +37,11 @@ router.get('/detail', function(req, res, next) {
 
     co(function* (){
         var f1 = yield aritcleDetail();
+        if(f1){
+            console.log("文章阅读数" + f1[0].readCount )
+            var readCount = f1[0].readCount?parseInt(f1[0].readCount) +1:1;
+            yield updateCount(readCount);
+        }
         var f2 = yield categoryList();
         res.render('aritcleDetail', {"article":f1,"categoryList":f2});
     })
