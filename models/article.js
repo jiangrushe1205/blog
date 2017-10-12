@@ -27,7 +27,7 @@ ArticleDAO.prototype.save = function(json, callback) {
 };
 
 ArticleDAO.prototype.find = function(json, callback) {
-    Article.find(json,callback);
+    Article.find(json).sort({'createTime':'desc'}).exec(callback);
 };
 
 ArticleDAO.prototype.update = function(conditions,update,callback){

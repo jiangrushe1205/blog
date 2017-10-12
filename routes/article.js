@@ -38,7 +38,6 @@ router.get('/detail', function(req, res, next) {
     co(function* (){
         var f1 = yield aritcleDetail();
         if(f1){
-            console.log("文章阅读数" + f1[0].readCount )
             var readCount = f1[0].readCount?parseInt(f1[0].readCount) +1:1;
             yield updateCount(readCount);
         }
@@ -75,7 +74,7 @@ router.get('/category/:category', function(req, res, next) {
     co(function* (){
         var f1 = yield aritcleDetail();
         var f2 = yield categoryList();
-        res.render('articleCategoryList',{"article":f1,"categoryList":f2});
+        res.render('articleCategoryList',{"article":f1,"categoryList":f2,"categoryName":req.params.category});
     })
 
 

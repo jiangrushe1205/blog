@@ -9,32 +9,19 @@
                 <div class="tc-ch wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
 
                     <div class="tch-img">
-                        <a href="singlepage.html"><img src="images/t4.jpg" class="img-responsive" alt=""></a>
                     </div>
-
-                    <h3><a href="singlepage.html">java</a></h3>
-                    <p>中新网9月28日电 据外媒报道，泰国总理巴育28日披露，因“大米渎职案”获刑五年的前总理英拉目前正身处迪拜。
-                        报道称，巴育表示，通过情报人员，他已经掌握英拉的行踪。巴育还表示，他将进一步公布相关细节。
-                        当地时间27日，泰国最高法院政务人员刑事案件法庭再次就英拉“大米渎职案”开庭，英拉被判五年有期徒刑，不予保释。</p>
+                    <h3><a href="singlepage.html"><%=categoryName%></a></h3>
+                    <p></p>
                     <div class="clearfix"></div>
                 </div>
                 <!-- technology-top -->
                 <% for( i = 0; i < article.length;i++) { %>
 
                     <div class="wthree" style="padding: 1em 1em;margin-bottom: 0.5em;">
-                        <div class="col-md-6 wthree-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s" style="width:30%">
-                            <div class="tch-img">
-                                <% if(article[i].listPic){ %>
-                                    <a href="/article/detail?id=<%=article[i]._id %>"><img src="<%=article[i].listPic%>" class="img-responsive" alt="" style="display: block;max-width: 100%;height: 11em;width: 23em;"></a>
-                                <% }else{%>
-                                    <a href="/article/detail?id=<%=article[i]._id %>"><img src="images/defaultListPic.jpeg" class="img-responsive" alt="" style="display: block;max-width: 100%;height: 11em;width: 23em;"></a>
-                                <% }%>
-                            </div>
-                        </div>
                         <div class="col-md-6 wthree-right wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s" style="width:70%">
                             <h3><a href="/article/detail?id=<%=article[i]._id %>"><%=article[i].title%></a></h3>
                             <h6> <a href="/article/detail?id=<%=article[i]._id %>"><%=article[i].author%></a><span style="padding-left: 1em"><%=article[i].createTimeString%></span></h6>
-                            <p><%=article[i].summary%> .</p>
+                            <!--<p><%=article[i].summary%> .</p>-->
                             <div class="soci">
                                 <!--<ul>-->
                                     <!--<li class="hvr-rectangle-out"><a class="twit" href="#">阅读(10)</a></li>-->
