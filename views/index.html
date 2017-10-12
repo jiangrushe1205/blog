@@ -6,53 +6,53 @@
         <div class="col-md-9 technology-left">
             <div class="tech-no">
                 <!-- technology-top -->
-                <div class="tc-ch wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">
-                    <div id="myCarousel" class="carousel slide" >
-                        <!-- 轮播（Carousel）指标 -->
-                        <ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#myCarousel" data-slide-to="1"></li>
-                            <li data-target="#myCarousel" data-slide-to="2"></li>
-                        </ol>
-                        <!-- 轮播（Carousel）项目 -->
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <img src="/indexImage/1.jpg" style="width: 100%;height: 100%">
-                            </div>
-                            <div class="item">
-                                <img src="/indexImage/2.jpg" style="width: 100%;height: 100%">
-                            </div>
-                            <div class="item">
-                                <img src="/indexImage/3.jpg" style="width: 100%;height: 100%">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+                <!--<div class="tc-ch wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s">-->
+                    <!--<div id="myCarousel" class="carousel slide" >-->
+                        <!--&lt;!&ndash; 轮播（Carousel）指标 &ndash;&gt;-->
+                        <!--<ol class="carousel-indicators">-->
+                            <!--<li data-target="#myCarousel" data-slide-to="0" class="active"></li>-->
+                            <!--<li data-target="#myCarousel" data-slide-to="1"></li>-->
+                            <!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
+                        <!--</ol>-->
+                        <!--&lt;!&ndash; 轮播（Carousel）项目 &ndash;&gt;-->
+                        <!--<div class="carousel-inner">-->
+                            <!--<div class="item active">-->
+                                <!--<img src="/indexImage/1.jpg" style="width: 100%;height: 100%">-->
+                            <!--</div>-->
+                            <!--<div class="item">-->
+                                <!--<img src="/indexImage/2.jpg" style="width: 100%;height: 100%">-->
+                            <!--</div>-->
+                            <!--<div class="item">-->
+                                <!--<img src="/indexImage/3.jpg" style="width: 100%;height: 100%">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="clearfix"></div>-->
+                <!--</div>-->
                 <!-- technology-top -->
                 <% for( i = 0; i < article.length;i++) { %>
 
                 <div class="wthree" style="padding: 1em 1em;margin-bottom: 0.5em;">
-                    <div class="col-md-6 wthree-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s"
-                         style="width:30%">
-                        <div class="tch-img">
-                            <% if(article[i].listPic){ %>
-                            <a href="/article/detail?id=<%=article[i]._id %>"><img src="<%=article[i].listPic%>"
-                                                                                   class="img-responsive" alt=""
-                                                                                   style="display: block;max-width: 100%;height: 8em;width: 23em;"></a>
-                            <% }else{%>
-                            <a href="/article/detail?id=<%=article[i]._id %>"><img src="images/defaultListPic.jpeg"
-                                                                                   class="img-responsive" alt=""
-                                                                                   style="display: block;max-width: 100%;height: 8em;width: 23em;"></a>
-                            <% }%>
-                        </div>
-                    </div>
+                    <!--<div class="col-md-6 wthree-left wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s"-->
+                         <!--style="width:30%">-->
+                        <!--<div class="tch-img">-->
+                            <!--<% if(article[i].listPic){ %>-->
+                            <!--<a href="/article/detail?id=<%=article[i]._id %>"><img src="<%=article[i].listPic%>"-->
+                                                                                   <!--class="img-responsive" alt=""-->
+                                                                                   <!--style="display: block;max-width: 100%;height: 8em;width: 23em;"></a>-->
+                            <!--<% }else{%>-->
+                            <!--<a href="/article/detail?id=<%=article[i]._id %>"><img src="images/defaultListPic.jpeg"-->
+                                                                                   <!--class="img-responsive" alt=""-->
+                                                                                   <!--style="display: block;max-width: 100%;height: 8em;width: 23em;"></a>-->
+                            <!--<% }%>-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <div class="col-md-6 wthree-right wow fadeInDown" data-wow-duration=".8s" data-wow-delay=".2s"
                          style="width:70%">
                         <h3><a href="/article/detail?id=<%=article[i]._id %>"><%=article[i].title%></a></h3>
                         <h6><a href="/article/detail?id=<%=article[i]._id %>"><%=article[i].author%></a><span
                                 style="padding-left: 1em"><%=article[i].createTimeString%></span></h6>
-                        <p><%=article[i].summary%> .</p>
+                        <!--<p><%=article[i].summary%> .</p>-->
                         <div class="soci">
                             <!--<ul>-->
                             <!--<li class="hvr-rectangle-out"><a class="twit" href="#">阅读(10)</a></li>-->
