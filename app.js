@@ -103,6 +103,8 @@ var adminLogin = require('./routes/admin/login');
 var article = require('./routes/article');
 var authorize = require('./filter/authorize');
 
+var lufy = require('./routes/lufy');
+
 app.all('/admin/*', authorize.authorize, function (req, res, next) {
     next()
 });
@@ -115,6 +117,7 @@ app.use('/article', article);
 app.use('/admin', admin);
 app.use('/admin/login', adminLogin);
 app.use('/admin/article', adminArticle);
+app.use('/lufy', lufy);
 // //登录拦截器
 
 // 404 拦截
