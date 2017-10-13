@@ -23,11 +23,10 @@ function main () {
     /** 添加加载提示 */
     var loadingHint = new LTextField();
     loadingHint.text = "资源加载中……";
-    loadingHint.size = 20;
+    loadingHint.size = 30;
     loadingHint.x = (LGlobal.width - loadingHint.getWidth()) / 2;
     loadingHint.y = (LGlobal.height - loadingHint.getHeight()) / 2;
     addChild(loadingHint);
-
     /** 加载图片 */
     LLoadManage.load(
         [
@@ -41,7 +40,6 @@ function main () {
 
             /** 保存位图数据，方便后续使用 */
             imgBmpd = new LBitmapData(result["img"]);
-
             gameInit();
         }
     );
@@ -127,8 +125,8 @@ function initBlockList () {
 
     for (var i = 0; i < 9; i++) {
         /** 根据序号计算拼图块图片显示位置 */
-        var y = (i / 3) >>> 0, x = i % 3;
 
+        var y = (i / 3) >>> 0, x = i % 3;
         blockList.push(new Block(i, x, y));
     }
 }

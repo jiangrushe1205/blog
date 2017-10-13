@@ -1,13 +1,14 @@
 function Block (index, x, y) {
     LExtends(this, LSprite, []);
 
+
     var bmpd = imgBmpd.clone();
     bmpd.setProperties(x * 130, y * 130, 130, 130);
     this.bmp = new LBitmap(bmpd);
     this.addChild(this.bmp);
 
     var border = new LShape();
-    border.graphics.drawRect(3, "#CCCCCC", [0, 0, 130, 130]);
+    border.graphics.drawRect(3, "#fff", [0, 0, 130, 130]);
     this.addChild(border);
 
     this.index = index;
@@ -25,7 +26,7 @@ Block.isGameOver = function () {
     /** 计算还原度 */
     for (var i = 0; i < l; i++) {
         var b = blockList[i];
-
+        console.log(b.index + "-----" + i);
         if (b.index == i) {
             reductionAmount++;
         }
