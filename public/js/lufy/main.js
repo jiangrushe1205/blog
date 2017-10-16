@@ -238,7 +238,6 @@ function onFrame () {
 }
 
 function gameOver () {
-    isGameOver = true;
 
     var resultLayer = new LSprite();
     resultLayer.filters = [new LDropShadowFilter()];

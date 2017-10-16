@@ -1,6 +1,8 @@
 var express = require('express');
 var ArticleDao = require('../../models/article');
-var CategoryDAO = require('../../models/category');
+var CategoryDao = require('../../models/category');
+var moment = require('moment');
+var co = require('co');
 var router = express.Router();
 
 /**
@@ -14,9 +16,50 @@ var cheerio = require('cheerio');
  * 创建文章
  */
 router.get('/create', function (req, res, next) {
+    var categoryList = function(){
+        return new Promise(function(resolve,reject){
+            CategoryDao.find({}, function (error, doc) {
+                if (error) reject(error);
+                resolve(doc)
+            })
+        })
+    }
 
-    CategoryDAO.find({}, function (error, doc) {
-        res.render('admin/createArticle', {"categoryList": doc});
+
+    co(function* (){
+        var f2 = yield categoryList();
+        res.render('admin/createArticle', {"categoryList":f2});
+    })
+
+});
+
+/**
+ * 创建文章
+ */
+router.get('/update/:id', function (req, res, next) {
+    var categoryList = function(){
+        return new Promise(function(resolve,reject){
+            CategoryDao.find({}, function (error, doc) {
+                if (error) reject(error);
+                resolve(doc)
+            })
+        })
+    }
+
+    var aritcleDetail = function(){
+        return new Promise(function(resolve,reject){
+            ArticleDao.find({"_id":req.params.id},function (error,doc) {
+                if(error) reject(error);
+                doc[0].createTimeString = moment(doc[0].createTime).format("YYYY-MM-DD");
+                resolve(doc)
+            });
+        })
+    }
+
+    co(function* (){
+        var f1 = yield aritcleDetail();
+        var f2 = yield categoryList();
+        res.render('admin/updateArticle', {"article":f1,"categoryList":f2});
     })
 
 });
@@ -41,6 +84,7 @@ router.post("/save", function (req, res, next) {
         res.render('admin/login', json);
         return;
     }
+
     var article = {
         title: req.body.title,
         author: req.body.author,
@@ -48,29 +92,54 @@ router.post("/save", function (req, res, next) {
         category: req.body.category,
         content: req.body.content,
         listPic: req.body.listPic,
-        summary:req.body.summary
+        summary: req.body.summary
     };
-    ArticleDao.save(article, function (err) {
-        if (err) {
-            var json = {error: ermsg.join("\n")};
-            res.render('admin/create', json);
-        } else {
-            CategoryDAO.findOne({categoryName:req.body.category},function (error,doc) {
-                if(doc){
-                    var count = doc.count?parseInt(doc.count):0;
-                    CategoryDAO.update({"categoryName":req.body.category},{ "count": count + 1 },function(error,doc){
-                        console.log("-------------------------" + doc);
-                    })
-                }else{
-                    console.log("-------------------------失败");
-                }
 
-            })
-            res.redirect('/admin/article/success');
-        }
-    })
+    if(!req.body._id){
+        ArticleDao.save(article, function (err) {
+            if (err) {
+                var json = {error: ermsg.join("\n")};
+                res.render('admin/create', json);
+            } else {
+                CategoryDao.findOne({categoryName: req.body.category}, function (error, doc) {
+                    if (doc) {
+                        var count = doc.count ? parseInt(doc.count) : 0;
+                        CategoryDao.update({"categoryName": req.body.category}, {"count": count + 1}, function (error, doc) {
+                            console.log("-------------------------" + doc);
+                        })
+                    } else {
+                        console.log("-------------------------失败");
+                    }
 
+                })
+                res.redirect('/admin/article/success');
+            }
+        })
+    }else{
+        ArticleDao.update({"_id":req.body._id}, article,function (err) {
+            if (err) {
+                var json = {error: ermsg.join("\n")};
+                res.render('admin/update', json);
+            } else {
+                res.redirect('/admin/article/list');
+            }
+        })
+    }
 })
+
+
+/**
+ * 创建文章
+ */
+router.get('/delete/:id', function (req, res, next) {
+
+    ArticleDao.delete({"_id":req.params.id},function(error,doc){
+        if(error) console.log(error);
+        console.log(doc)
+    });
+    res.redirect('/admin/article/list');
+});
+
 
 /**
  * 文章成功页面
@@ -83,7 +152,7 @@ router.get('/success', function (req, res, next) {
 /* GET home page. */
 router.get('/reptile', function (req, res, next) {
 
-    request('http://www.qq.com/', function(error, response, body) {
+    request('http://www.qq.com/', function (error, response, body) {
         if (!error && response.statusCode == 200) {
             $ = cheerio.load(body);
             console.log($("#newsInfoQuanguo").html());
@@ -117,11 +186,11 @@ router.post('/add/category', function (req, res, next) {
     }
     var category = {
         categoryName: req.body.categoryName,
-        count:0
+        count: 0
     };
 
 
-    CategoryDAO.save(category, function (err) {
+    CategoryDao.save(category, function (err) {
         if (err) {
             var json = {error: ermsg.join("\n")};
             res.render('admin/category', json);
@@ -131,5 +200,18 @@ router.post('/add/category', function (req, res, next) {
     })
 });
 
+
+router.get('/list', function (req, res, next) {
+
+    ArticleDao.find({}, function (error, doc) {
+        if (error) reject(error);
+        for (var i = 0; i < doc.length; i++) {
+            doc[i].createTimeString = moment(doc[i].createTime).format("YYYY-MM-DD");
+        }
+        res.render('admin/articleList', {"articles": doc});
+    })
+
+
+});
 
 module.exports = router;

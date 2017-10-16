@@ -34,5 +34,9 @@ ArticleDAO.prototype.update = function(conditions,update,callback){
     Article.update(conditions,update,callback);
 }
 
+ArticleDAO.prototype.delete = function(conditions,callback){
+    Article.remove(conditions,callback);
+}
+
 
 module.exports = new ArticleDAO();

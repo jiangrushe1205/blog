@@ -26,7 +26,6 @@ Block.isGameOver = function () {
     /** 计算还原度 */
     for (var i = 0; i < l; i++) {
         var b = blockList[i];
-        console.log(b.index + "-----" + i);
         if (b.index == i) {
             reductionAmount++;
         }
