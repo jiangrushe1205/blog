@@ -16,8 +16,8 @@ var cheerio = require('cheerio');
  * 创建文章
  */
 router.get('/create', function (req, res, next) {
-    var categoryList = function(){
-        return new Promise(function(resolve,reject){
+    var categoryList = function () {
+        return new Promise(function (resolve, reject) {
             CategoryDao.find({}, function (error, doc) {
                 if (error) reject(error);
                 resolve(doc)
@@ -26,9 +26,9 @@ router.get('/create', function (req, res, next) {
     }
 
 
-    co(function* (){
+    co(function*() {
         var f2 = yield categoryList();
-        res.render('admin/createArticle', {"categoryList":f2});
+        res.render('admin/createArticle', {"categoryList": f2});
     })
 
 });
@@ -37,8 +37,8 @@ router.get('/create', function (req, res, next) {
  * 创建文章
  */
 router.get('/update/:id', function (req, res, next) {
-    var categoryList = function(){
-        return new Promise(function(resolve,reject){
+    var categoryList = function () {
+        return new Promise(function (resolve, reject) {
             CategoryDao.find({}, function (error, doc) {
                 if (error) reject(error);
                 resolve(doc)
@@ -46,20 +46,20 @@ router.get('/update/:id', function (req, res, next) {
         })
     }
 
-    var aritcleDetail = function(){
-        return new Promise(function(resolve,reject){
-            ArticleDao.find({"_id":req.params.id},function (error,doc) {
-                if(error) reject(error);
+    var aritcleDetail = function () {
+        return new Promise(function (resolve, reject) {
+            ArticleDao.find({"_id": req.params.id}, function (error, doc) {
+                if (error) reject(error);
                 doc[0].createTimeString = moment(doc[0].createTime).format("YYYY-MM-DD");
                 resolve(doc)
             });
         })
     }
 
-    co(function* (){
+    co(function*() {
         var f1 = yield aritcleDetail();
         var f2 = yield categoryList();
-        res.render('admin/updateArticle', {"article":f1,"categoryList":f2});
+        res.render('admin/updateArticle', {"article": f1, "categoryList": f2});
     })
 
 });
@@ -95,7 +95,7 @@ router.post("/save", function (req, res, next) {
         summary: req.body.summary
     };
 
-    if(!req.body._id){
+    if (!req.body._id) {
         ArticleDao.save(article, function (err) {
             if (err) {
                 var json = {error: ermsg.join("\n")};
@@ -115,8 +115,8 @@ router.post("/save", function (req, res, next) {
                 res.redirect('/admin/article/success');
             }
         })
-    }else{
-        ArticleDao.update({"_id":req.body._id}, article,function (err) {
+    } else {
+        ArticleDao.update({"_id": req.body._id}, article, function (err) {
             if (err) {
                 var json = {error: ermsg.join("\n")};
                 res.render('admin/update', json);
@@ -132,12 +132,44 @@ router.post("/save", function (req, res, next) {
  * 创建文章
  */
 router.get('/delete/:id', function (req, res, next) {
+    var udpateArticle = function(){
+        return new Promise(function(accpect,reject){
+            ArticleDao.find({"_id": req.params.id}, function (error, doc) {
+                if (error) console.log(error);
+                console.log("******************" + doc[0].category );
+                CategoryDao.findOne({categoryName: doc[0].category}, function (error, doc) {
+                    if (doc) {
+                        console.log("******************" + doc.categoryName );
+                        var count = doc.count ? parseInt(doc.count) - 1 : 0;
+                        console.log("******************" + count);
+                        CategoryDao.update({"categoryName": doc.categoryName}, {"count": count}, function (error, doc) {
+                            console.log("-------------------------" + doc);
+                            accpect(doc);
+                        })
+                    } else {
+                        console.log("-------------------------失败");
+                    }
+                })
+            })
+        })
+    }
 
-    ArticleDao.delete({"_id":req.params.id},function(error,doc){
-        if(error) console.log(error);
-        console.log(doc)
-    });
-    res.redirect('/admin/article/list');
+    var deleteArticle = function(){
+        return new Promise(function(accept,reject){
+            ArticleDao.delete({"_id": req.params.id}, function (error, doc) {
+                if (error) console.log(error);
+                console.log(doc)
+                accept(doc);
+            });
+        })
+    }
+
+    co(function*(){
+        yield udpateArticle();
+        yield deleteArticle();
+        res.redirect('/admin/article/list');
+    })
+
 });
 
 

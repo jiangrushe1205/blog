@@ -38,5 +38,9 @@ ArticleDAO.prototype.delete = function(conditions,callback){
     Article.remove(conditions,callback);
 }
 
+ArticleDAO.prototype.findOne = function(json, callback) {
+    Article.findOne(json,callback);
+};
+
 
 module.exports = new ArticleDAO();
