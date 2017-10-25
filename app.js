@@ -1,11 +1,16 @@
 //公共资源模块
-var express = require('express');
-var session = require('express-session');
-var validator = require('express-validator');
-var path = require('path');
-var logger = require('morgan');
+var express      = require('express');
+var session      = require('express-session');
+var validator    = require('express-validator');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var bodyParser   = require('body-parser');
+var path         = require('path');
+var logger       = require('morgan');
+/**
+ * 安全验证
+ */
+var passport      = require('passport');
+var passportLocalStrategy = require('passport-local').Strategy;
 
 /**
  * 上传图片
@@ -23,23 +28,29 @@ var formidable = require('formidable');
 
 var app = express();
 
+//设置模板
+app.set('views', path.join(__dirname, 'views'));
+app.engine('.html', require('ejs').__express);
+app.set('view engine', 'html');
+
 /**
  * session 调节
  */
-app.use(cookieParser());
-app.use(validator());
-app.use(session({
-    secret: '1234567890',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        secure: true,
-        maxAge: 60000
-    }
-}))
-
+// app.use(express.cookieParser());
+// app.use(express.session({
+//     secret: 'www.91freefly.com',
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {
+//         secure: true,
+//         maxAge: 60000
+//     }
+// }))
+app.use(passport.initialize())
+app.use(passport.session())
 
 /**
+ *
  * 阿里云oss
  */
 var client = new OSS({
@@ -79,15 +90,8 @@ app.post("/upload", function (req, res, next) {
             console.error('error: %j', err);
         });
     });
-
-
 })
 
-
-//设置模板
-app.set('views', path.join(__dirname, 'views'));
-app.engine('.html', require('ejs').__express);
-app.set('view engine', 'html');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -95,20 +99,14 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('public'));
 
 //业务模块
+var authorize = require('./filter/authorize');
 var index = require('./routes/index');
 var users = require('./routes/user');
 var adminArticle = require('./routes/admin/article');
 var admin = require('./routes/admin/index');
 var adminLogin = require('./routes/admin/login');
 var article = require('./routes/article');
-var authorize = require('./filter/authorize');
-
 var lufy = require('./routes/lufy');
-
-app.all('/admin/*', authorize.authorize, function (req, res, next) {
-    next()
-});
-
 
 //业务访问模块
 app.use('/', index);
@@ -118,8 +116,32 @@ app.use('/admin', admin);
 app.use('/admin/login', adminLogin);
 app.use('/admin/article', adminArticle);
 app.use('/lufy', lufy);
-// //登录拦截器
 
+//
+// passport.use("local",new passportLocalStrategy(function (username,password,done) {
+//     var user = {
+//         id: '1',
+//         username: '840398688@qq.com',
+//         password: 'qwerty'
+//     };
+//
+//     if (username !== user.username) {
+//         return done(null, false, { message: 'Incorrect username.' });
+//     }
+//     if (password !== user.password) {
+//         return done(null, false, { message: 'Incorrect password.' });
+//     }
+//
+//     return done(null,user);
+// }))
+//
+// passport.serializeUser(function(user,done){
+//     done(null,user);
+// })
+//
+// passport.deserializeUser(function(user,done){
+//     done(null,user);
+// })
 // 404 拦截
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
@@ -148,7 +170,7 @@ app.use(function (err, req, res, next) {
 });
 
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 
 var server = app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + server.address().port);

@@ -11,13 +11,16 @@ var router = express.Router();
 router.get('/user', function(req, res, next) {
   // res.render('user', { title: 'jiangrushe' });
 
-  request("https://m.toutiao.com/?W2atIF=1",function(error,response,body){
+  request("http://www.qq.com/",function(error,response,body){
       if(!error && response.statusCode == 200){
           $ = cheerio.load(body);
-          console.log($(".list_content").find(".has_action").length);
-          res.json({
-              cat:$(".list_content").find(".has_action").length
-          })
+    
+          var content = $("#newsContent01 ul").text();
+          // for(var i = 0; i<content.length; i++){
+          //
+          // }
+
+          res.json({"content":content})
       }
   });
 

@@ -16,6 +16,9 @@ var cheerio = require('cheerio');
  * 创建文章
  */
 router.get('/create', function (req, res, next) {
+
+    console.log(req.url + " ************** 》》" + req.session.user);
+
     var categoryList = function () {
         return new Promise(function (resolve, reject) {
             CategoryDao.find({}, function (error, doc) {
