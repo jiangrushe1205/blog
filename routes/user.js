@@ -14,7 +14,7 @@ router.get('/user', function(req, res, next) {
   request("http://www.qq.com/",function(error,response,body){
       if(!error && response.statusCode == 200){
           $ = cheerio.load(body);
-    
+
           var content = $("#newsContent01 ul").text();
           // for(var i = 0; i<content.length; i++){
           //

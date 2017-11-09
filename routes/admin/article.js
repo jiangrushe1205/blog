@@ -17,7 +17,7 @@ var cheerio = require('cheerio');
  */
 router.get('/create', function (req, res, next) {
 
-    console.log(req.url + " ************** 》》" + req.session.user);
+    // console.log(req.url + " ************** 》》" + req.session.user);
 
     var categoryList = function () {
         return new Promise(function (resolve, reject) {
